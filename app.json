@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/vehicles/index",
+    "pages/records/index",
+    "pages/record-form/index",
+    "pages/stats/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "油耗记录",
+    "navigationBarBackgroundColor": "#0f172a",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f8fafc",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#64748b",
+    "selectedColor": "#0f172a",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/vehicles/index",
+        "text": "车辆"
+      },
+      {
+        "pagePath": "pages/records/index",
+        "text": "记录"
+      },
+      {
+        "pagePath": "pages/stats/index",
+        "text": "统计"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

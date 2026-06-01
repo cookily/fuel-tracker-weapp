@@ -1,0 +1,47 @@
+<view class="page">
+  <view class="card">
+    <view class="title">统计概览</view>
+    <view class="subtitle">{{vehicle ? vehicle.name : '请先创建车辆'}}</view>
+  </view>
+
+  <view wx:if="{{stats}}" class="card">
+    <view class="section-title">累计数据</view>
+    <view class="grid">
+      <view class="metric">
+        <view class="metric-label">累计里程</view>
+        <view class="metric-value">{{stats.totalDistanceKm}} km</view>
+      </view>
+      <view class="metric">
+        <view class="metric-label">累计加油量</view>
+        <view class="metric-value">{{stats.totalFuelLiters}} L</view>
+      </view>
+      <view class="metric">
+        <view class="metric-label">平均油耗</view>
+        <view class="metric-value">{{stats.averageFuelPer100Km}} L</view>
+      </view>
+      <view class="metric">
+        <view class="metric-label">累计油费</view>
+        <view class="metric-value">{{stats.totalCost}} 元</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{trendBars.length}}" class="card">
+    <view class="section-title">最近阶段趋势</view>
+    <view class="trend-bar-row">
+      <view wx:for="{{trendBars}}" wx:key="label" class="trend-bar-wrap">
+        <view class="trend-bar" style="height: {{item.height}};"></view>
+        <view class="trend-label">{{item.valueText}}</view>
+        <view class="trend-label">{{item.label}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:elif="{{vehicle}}" class="card empty">
+    当前可计算阶段不足，继续记录满油数据后会生成趋势。
+  </view>
+
+  <view wx:else class="card empty">
+    请先创建车辆并录入记录。
+  </view>
+</view>

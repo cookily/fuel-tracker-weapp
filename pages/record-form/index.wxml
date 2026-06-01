@@ -1,0 +1,69 @@
+<view class="page">
+  <view class="card" wx:if="{{mode === 'vehicle'}}">
+    <view class="section-title">车辆信息</view>
+
+    <view class="form-item">
+      <text class="form-label">车辆名称</text>
+      <input class="input" placeholder="例如：家用轿车" value="{{vehicleForm.name}}" data-field="name" bindinput="handleVehicleInput" />
+      <view wx:if="{{errors.name}}" class="error">{{errors.name}}</view>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">车牌备注</text>
+      <input class="input" placeholder="例如：沪A12345" value="{{vehicleForm.plateNote}}" data-field="plateNote" bindinput="handleVehicleInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">燃油类型</text>
+      <picker class="picker" mode="selector" range="{{fuelTypes}}" value="{{vehicleForm.fuelTypeIndex}}" bindchange="handleFuelTypeChange">
+        <view>{{fuelTypes[vehicleForm.fuelTypeIndex]}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">油箱容积</text>
+      <input class="input" type="digit" placeholder="选填，例如 50" value="{{vehicleForm.tankCapacity}}" data-field="tankCapacity" bindinput="handleVehicleInput" />
+    </view>
+
+    <button class="button-primary" bindtap="handleSave">保存车辆</button>
+  </view>
+
+  <view class="card" wx:else>
+    <view class="section-title">加油记录</view>
+
+    <view class="form-item">
+      <text class="form-label">加油日期</text>
+      <picker mode="date" value="{{recordForm.date}}" bindchange="handleDateChange">
+        <view class="picker">{{recordForm.date || '请选择加油日期'}}</view>
+      </picker>
+      <view wx:if="{{errors.date}}" class="error">{{errors.date}}</view>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">当前里程（km）</text>
+      <input class="input" type="digit" placeholder="例如 15230" value="{{recordForm.odometerKm}}" data-field="odometerKm" bindinput="handleRecordInput" />
+      <view wx:if="{{errors.odometerKm}}" class="error">{{errors.odometerKm}}</view>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">加油量（L）</text>
+      <input class="input" type="digit" placeholder="例如 32.5" value="{{recordForm.fuelLiters}}" data-field="fuelLiters" bindinput="handleRecordInput" />
+      <view wx:if="{{errors.fuelLiters}}" class="error">{{errors.fuelLiters}}</view>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">加油金额（元）</text>
+      <input class="input" type="digit" placeholder="例如 240" value="{{recordForm.totalCost}}" data-field="totalCost" bindinput="handleRecordInput" />
+      <view wx:if="{{errors.totalCost}}" class="error">{{errors.totalCost}}</view>
+    </view>
+
+    <view class="form-item">
+      <view class="switch-row row">
+        <text>本次已加满</text>
+        <switch checked="{{recordForm.isFullTank}}" bindchange="handleSwitchChange" />
+      </view>
+    </view>
+
+    <button class="button-primary" bindtap="handleSave">保存记录</button>
+  </view>
+</view>

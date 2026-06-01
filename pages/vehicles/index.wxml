@@ -1,0 +1,31 @@
+<view class="page">
+  <view class="card">
+    <view class="title">车辆管理</view>
+    <view class="subtitle">先创建一辆车，再开始记录每次加油数据</view>
+    <view class="actions">
+      <button class="button-primary" bindtap="handleCreate">新建车辆</button>
+      <button class="button-secondary" bindtap="handleQuickCreate">快速创建</button>
+    </view>
+  </view>
+
+  <view wx:if="{{vehicles.length}}" class="card">
+    <view class="section-title">我的车辆</view>
+    <view wx:for="{{vehicles}}" wx:key="id" class="record-item">
+      <view class="row">
+        <view>
+          <view class="title" style="font-size: 30rpx;">{{item.name}}</view>
+          <view class="subtitle">{{item.fuelType}} · {{item.plateNote || '未填写备注'}}</view>
+        </view>
+        <view wx:if="{{currentVehicleId === item.id}}" class="pill">当前车辆</view>
+      </view>
+      <view class="actions">
+        <button class="button-secondary" data-id="{{item.id}}" bindtap="handleSelect">切换</button>
+        <button class="button-primary" data-id="{{item.id}}" bindtap="handleEdit">编辑</button>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="card empty">
+    还没有车辆，先创建一辆开始使用。
+  </view>
+</view>

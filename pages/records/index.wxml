@@ -1,0 +1,32 @@
+<view class="page">
+  <view class="card">
+    <view class="title">加油记录</view>
+    <view class="subtitle">{{vehicle ? vehicle.name : '请先创建车辆'}}</view>
+    <view class="actions">
+      <button class="button-primary" bindtap="handleCreate">新增记录</button>
+    </view>
+  </view>
+
+  <view wx:if="{{records.length}}" class="card">
+    <view class="section-title">历史记录</view>
+    <view wx:for="{{records}}" wx:key="id" class="record-item">
+      <view class="row">
+        <view>
+          <view>{{item.dateLabel}}</view>
+          <view class="subtitle">里程 {{item.odometerKm}} km · {{item.fuelLiters}} L · {{item.totalCost}} 元</view>
+        </view>
+        <view class="pill">{{item.isFullTank ? '已加满' : '未加满'}}</view>
+      </view>
+      <view class="subtitle" style="margin-top: 12rpx;">阶段油耗：{{item.fuelPer100KmText}}</view>
+      <view wx:if="{{item.segment && !item.segment.pending}}" class="subtitle">阶段里程：{{item.segment.distanceKm}} km · 百公里油费：{{item.segment.costPer100Km}} 元</view>
+      <view class="actions">
+        <button class="button-secondary" data-id="{{item.id}}" bindtap="handleEdit">编辑</button>
+        <button class="button-danger" data-id="{{item.id}}" bindtap="handleDelete">删除</button>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="card empty">
+    还没有加油记录，点击上方按钮新增第一条。
+  </view>
+</view>
